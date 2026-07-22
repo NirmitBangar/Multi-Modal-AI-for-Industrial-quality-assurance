@@ -1,6 +1,6 @@
 # Week 7-8 — Streamlit App & Local LLM Integration
 
-## 🎯 Goals for These Two Weeks
+##  Goals for These Two Weeks
 
 - Wrap Week 6's trained YOLOv8 model in a usable web interface, not just a script
 - Learn the Streamlit mental model: script re-runs top-to-bottom on every interaction, so state and expensive resources (model loading) have to be handled deliberately (`st.cache_resource`, `st.session_state`)
@@ -10,7 +10,7 @@
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
                 ┌─────────────┐      ┌──────────────────┐      ┌────────────────────┐
@@ -37,7 +37,7 @@ None of `report_utils.py` or the data classes in `detector.py` import `torch`/`u
 
 ---
 
-## 🧠 Design Decisions Worth Explaining (e.g. in an interview)
+##  Design Decisions Worth Explaining (e.g. in an interview)
 
 **1. Severity is computed by a fixed rule, not decided by the LLM.**
 `report_utils.compute_severity()` scores severity from defect class (structural classes like `crazing`/`inclusion`/`rolled-in_scale` are weighted higher than cosmetic ones like `scratches`), confidence, and count. The LLM is only asked to *write* the Summary and *phrase* Recommended Actions consistent with a severity it's handed — never to invent the severity itself. A QA tool where the same input can be labeled "Medium" one run and "Critical" the next, purely because of LLM sampling temperature, isn't trustworthy. Keeping the risk judgement in deterministic code and the language generation in the LLM plays to each one's strengths.
@@ -63,7 +63,7 @@ Parsing prose reliably out of a small local model is fragile. The prompt in `llm
 
 ---
 
-## 🖥️ Files in This Folder
+##  Files in This Folder
 
 | File | Purpose |
 |---|---|
@@ -78,7 +78,7 @@ Parsing prose reliably out of a small local model is fragile. The prompt in `llm
 
 ---
 
-## ▶️ How to Run
+##  How to Run
 
 ### 1. Install dependencies
 ```bash
@@ -117,7 +117,7 @@ python test_report_logic.py -v
 
 ---
 
-## ⚠️ What I Wasn't Able To Verify End-to-End (Being Upfront About It)
+##  What I Wasn't Able To Verify End-to-End (Being Upfront About It)
 
 Everything above was written and unit-tested for logical correctness (`test_report_logic.py` passes, and the fallback path reproduces the assignment's sample output almost exactly — see below), but I don't have a GPU environment with `torch`/`ultralytics` installed, an actual trained `best.pt`, or a running Ollama daemon available to me to do a full live click-through of the Streamlit UI myself. Concretely, not yet confirmed on a real machine:
 
@@ -142,7 +142,7 @@ Everything above was written and unit-tested for logical correctness (`test_repo
 
 ---
 
-## 🧵 Resources Used
+##  Resources Used
 
 | Resource | Link |
 |---|---|
@@ -153,6 +153,6 @@ Everything above was written and unit-tested for logical correctness (`test_repo
 
 ---
 
-## 🔑 Key Takeaway
+##  Key Takeaway
 
 > The interesting engineering in this phase isn't "call an LLM" — it's deciding what the LLM should and shouldn't be trusted to decide. Severity had to stay deterministic so the report doesn't contradict itself between runs; the LLM had to be asked for structured JSON instead of prose because parsing free text reliably from a small local model isn't realistic; and the whole app had to survive the LLM simply not being available, because a QA tool that goes down when a background process isn't running would never actually get deployed on a real inspection line. That's the difference between "I called `ollama.generate()`" and "I built a system that uses an LLM safely" — and it's exactly the kind of judgement call that's worth being able to explain, not just the fact that it works.
