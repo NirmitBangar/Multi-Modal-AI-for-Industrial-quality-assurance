@@ -52,7 +52,7 @@ Parsing prose reliably out of a small local model is fragile. The prompt in `llm
 
 ---
 
-## 📄 Report Generation Flow
+##  Report Generation Flow
 
 1. `detector.py` returns a sorted list of `Defect(class_name, confidence, box_xyxy)`
 2. `report_utils.compute_severity()` scores severity from that list
