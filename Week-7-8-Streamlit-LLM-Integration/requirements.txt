@@ -1,0 +1,5 @@
+streamlit>=1.37
+ultralytics>=8.2
+pillow>=10.0
+numpy>=1.26
+requests>=2.31

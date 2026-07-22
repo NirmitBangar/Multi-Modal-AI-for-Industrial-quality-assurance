@@ -1,0 +1,13 @@
+Place Week 6's trained checkpoint here as `best.pt`:
+
+    weights/best.pt
+
+It's the file produced at:
+    runs/detect/<run_name>/weights/best.pt
+after running `Week 6-CV Model/train_yolo.py`.
+
+This file is intentionally NOT committed to git (see .gitignore) since
+trained weights are typically 6-50MB+ and don't belong in git history.
+For the final submission, upload best.pt separately (Google Drive / GitHub
+Release / Git LFS) as required by the assignment's submission instructions,
+and link it from the main README.
