@@ -1,7 +1,5 @@
-# Trained weights - copy in locally, see weights/PLACE_BEST_PT_HERE.txt
-# (Comment this line out if you'd rather commit best.pt directly, matching
-# how Week 6 committed its .pt files.)
-weights/*.pt
+# weights/best.pt is intentionally committed — it's the actual submission
+# deliverable, same convention Week 6 used for its .pt files.
 
 # Local env / secrets
 .env
