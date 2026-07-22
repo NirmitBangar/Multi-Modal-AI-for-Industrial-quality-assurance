@@ -38,16 +38,13 @@ The system is designed to:
 # Repository Structure
 
 ```
-Multi-Modal-AI-for-Industrial-quality-assurance
-│
-├── Week-1-Python-Foundations-and-ML-Basics
-├── Week-2-Classical-Machine-Learning
-├── Week-3-Deep-Learning-and-Computer-Vision
-├── Week-4-Large-Language-Models
-├── Week-5-6-YOLOv8-Industrial-Defect-Detection
+├── Week 1 - Python Foundations & ML Basics
+├── Week 2 - ML Algorithms & Data Analysis
+├── Week 3 - Deep Learning & CNNs for Defect Detection
+├── Week 4 - Introduction to Large Language Models (LLMs)
+├── Week 5
+├── Week 6-CV Model
 ├── Week-7-8-Streamlit-LLM-Integration
-│
-└── README.md
 ```
 
 ---
