@@ -77,40 +77,222 @@ Parsing prose reliably out of a small local model is fragile. The prompt in `llm
 | `weights/` | Put Week 6's `best.pt` here (gitignored by default — see the file inside) |
 
 ---
+#  How to Run the Project
 
-##  How to Run
+Follow the steps below to run the Streamlit application on your local machine.
 
-### 1. Install dependencies
+---
+
+## Step 1: Open the Project
+
+Open the project folder in **Visual Studio Code**.
+
+The folder structure should look like this:
+
+```
+Week-7-8-Streamlit-LLM-Integration/
+│
+├── app.py
+├── detector.py
+├── llm_report.py
+├── report_utils.py
+├── check_ollama.py
+├── requirements.txt
+├── weights/
+│   └── best.pt
+└── README.md
+```
+
+> **Important:** Make sure the trained YOLO model (`best.pt`) is present inside the `weights` folder.
+
+---
+
+## Step 2: Open the Terminal
+
+In VS Code:
+
+**Terminal → New Terminal**
+
+Make sure you are inside the project folder.
+
+If not, run:
+
 ```bash
-cd "Week 7-8 - Streamlit App & LLM Integration"
-pip install -r requirements.txt
+cd "Week-7-8-Streamlit-LLM-Integration"
 ```
 
-### 2. Add the trained model
-Copy Week 6's `runs/detect/<run_name>/weights/best.pt` into:
-```
-weights/best.pt
-```
+---
 
-### 3. Install and start Ollama, pull Llama 3.2
+## Step 3: Install Python Dependencies
+
+Install all the required Python libraries by running:
+
 ```bash
-# Install Ollama: https://ollama.com/download
+python -m pip install -r requirements.txt
+```
+
+This command installs all the packages listed in `requirements.txt`.
+
+Wait until the installation completes successfully.
+
+---
+
+## Step 4: Install Ollama
+
+Download and install Ollama from:
+
+https://ollama.com/download
+
+Complete the installation before proceeding.
+
+---
+
+## Step 5: Download the Llama 3.2 Model
+
+Run the following command:
+
+```bash
 ollama pull llama3.2
-ollama serve          # if it isn't already running as a background service
 ```
 
-### 4. Sanity-check the LLM connection (recommended before demoing)
+This downloads the Llama 3.2 Large Language Model to your computer.
+
+> This step only needs to be done once.
+
+---
+
+## Step 6: Start the Ollama Server
+
+Run:
+
+```bash
+ollama serve
+```
+
+Leave this terminal open.
+
+If you see an error saying the port is already in use, it means Ollama is already running, so you can continue.
+
+---
+
+## Step 7: Verify the Ollama Connection
+
+Open **another terminal** in VS Code.
+
+Run:
+
 ```bash
 python check_ollama.py
 ```
 
-### 5. Run the app
+If everything is working correctly, the script will connect to the local Llama model successfully.
+
+---
+
+## Step 8: Run the Streamlit Application
+
+Run:
+
+```bash
+python -m streamlit run app.py
+```
+
+If Streamlit is already added to your system PATH, you can also use:
+
 ```bash
 streamlit run app.py
 ```
-This opens the app at `http://localhost:8501`. Upload a NEU-DET-style steel surface image (the Week 6 test split is a good source of demo images), review the detections, then click **Generate Inspection Report**.
 
-### 6. Run the tests
+---
+
+## Step 9: Open the Application
+
+After running the previous command, you will see something similar to:
+
+```
+Local URL: http://localhost:8501
+```
+
+Open the URL in your web browser.
+
+---
+
+## Step 10: Test the Application
+
+1. Upload a steel surface image.
+2. Click **Detect Defects**.
+3. Review the detected defects.
+4. Click **Generate Inspection Report**.
+5. The application will generate an AI-based inspection report using Llama 3.2.
+
+---
+
+#  Run the Unit Tests
+
+To verify that the report generation logic is working correctly, run:
+
+```bash
+python test_report_logic.py -v
+```
+
+---
+
+#  Expected Folder Structure
+
+```
+Week-7-8-Streamlit-LLM-Integration/
+│
+├── app.py
+├── detector.py
+├── llm_report.py
+├── report_utils.py
+├── check_ollama.py
+├── test_report_logic.py
+├── requirements.txt
+├── README.md
+│
+├── weights/
+│   └── best.pt
+│
+└── PLACE_BEST_PT_HERE.txt
+```
+
+---
+
+#  Complete Workflow
+
+Run the following commands one by one:
+
+```bash
+cd "Week-7-8-Streamlit-LLM-Integration"
+```
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+```bash
+ollama pull llama3.2
+```
+
+```bash
+ollama serve
+```
+
+Open a **new terminal** and run:
+
+```bash
+python check_ollama.py
+```
+
+Finally, start the application:
+
+```bash
+python -m streamlit run app.py
+```
+
+To run the tests:
+
 ```bash
 python test_report_logic.py -v
 ```
